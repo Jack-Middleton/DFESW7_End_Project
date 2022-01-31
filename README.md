@@ -47,7 +47,6 @@
 </details>
 
 
-
 <!-- ABOUT THE PROJECT -->
 ## Why are we doing this 
 
@@ -131,6 +130,7 @@ Everything
 ## Link to my Jira board
 
 
+<a href = "https://jack-middleton.atlassian.net/jira/software/projects/D7EP/boards/2/backlog?selectedIssue=D7EP-22"> Jira board </a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
