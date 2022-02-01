@@ -20,6 +20,7 @@ public class RecipeController {
 		this.RecipeService = recipeService;
 	}
 
+	// read all items in the database
 	@GetMapping
 	public ResponseEntity<List<RecipeBook>> readAll() {
 		ResponseEntity<List<RecipeBook>> authors = ResponseEntity.ok(RecipeService.getAll());
