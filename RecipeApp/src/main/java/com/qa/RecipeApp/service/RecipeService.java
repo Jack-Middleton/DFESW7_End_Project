@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.RecipeApp.data.entity.RecipeBook;
 import com.qa.RecipeApp.data.repository.Repository;
+import com.qa.RecipeApp.exceptions.RecipeNotFoundException;
 
 @Service
 public class RecipeService {
@@ -36,6 +37,7 @@ public class RecipeService {
 	public RecipeBook updateById(long id, RecipeBook recipeBook) throws Exception {
 		if (this.repository.existsById(id)) {
 			RecipeBook recipeExists = this.repository.getById(id);
+			System.out.println(recipeExists);
 			recipeExists.setAuthor(recipeBook.getAuthor());
 			recipeExists.setRecipeDetails(recipeBook.getRecipeDetails());
 			recipeExists.setRecipeName(recipeBook.getRecipeName());
@@ -50,8 +52,11 @@ public class RecipeService {
 			return this.repository.findById(id).get();
 		}
 
-		// error handling to go here
-		return null;
+		else {
+			// Custom exception
+			throw new RecipeNotFoundException("Recipe with id " + id + " not found");
+		}
+
 	}
 
 }
