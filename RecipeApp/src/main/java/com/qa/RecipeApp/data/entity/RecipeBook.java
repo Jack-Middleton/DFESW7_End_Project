@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table
+@Table(name = "RecipeBook")
 public class RecipeBook {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
