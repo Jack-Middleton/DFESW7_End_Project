@@ -26,4 +26,11 @@ public class RecipeService {
 		return this.repository.save(recipeBook);
 	}
 
+	public RecipeBook deleteById(long id) {
+		if (this.repository.existsById(id)) {
+			this.repository.deleteById(id);
+		}
+		return null;
+	}
+
 }
