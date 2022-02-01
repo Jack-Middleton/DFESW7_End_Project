@@ -32,13 +32,13 @@ public class RecipeController {
 	}
 
 	// read all items in the database
-	@GetMapping
+	@GetMapping("/getAll")
 	public ResponseEntity<List<RecipeBook>> readAll() {
 		ResponseEntity<List<RecipeBook>> authors = ResponseEntity.ok(RecipeService.getAll());
 		return authors;
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping("/get/{id}")
 	public ResponseEntity<RecipeBook> getById(@PathVariable("id") long id) {
 
 		ResponseEntity<RecipeBook> recipe = ResponseEntity.status(200).body(RecipeService.getById(id));
@@ -46,7 +46,7 @@ public class RecipeController {
 	}
 
 	// post method to add items to the database
-	@PostMapping
+	@PostMapping("/add")
 	public ResponseEntity<RecipeBook> addRecipe(@Valid @RequestBody RecipeBook recipeBook) {
 
 		// builder design pattern
@@ -55,7 +55,7 @@ public class RecipeController {
 		return recipes;
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
 	@ResponseBody
 	public ResponseEntity<RecipeBook> deleteByID(@PathVariable("id") long id) {
 		ResponseEntity<RecipeBook> recipes = ResponseEntity.status(200).body(RecipeService.deleteById(id));
@@ -63,7 +63,7 @@ public class RecipeController {
 
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping("/update/{id}")
 	@ResponseBody
 	public ResponseEntity<RecipeBook> updateByID(@PathVariable("id") long id, @RequestBody RecipeBook recipeBook)
 			throws Exception {
