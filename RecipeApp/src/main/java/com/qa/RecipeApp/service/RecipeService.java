@@ -34,16 +34,15 @@ public class RecipeService {
 		return null;
 	}
 
-	public RecipeBook updateById(long id, RecipeBook recipeBook) throws Exception {
+	public RecipeBook updateById(long id, RecipeBook recipeBook) {
 		if (this.repository.existsById(id)) {
 			RecipeBook recipeExists = this.repository.getById(id);
-			System.out.println(recipeExists);
 			recipeExists.setAuthor(recipeBook.getAuthor());
 			recipeExists.setRecipeDetails(recipeBook.getRecipeDetails());
 			recipeExists.setRecipeName(recipeBook.getRecipeName());
 			return this.repository.save(recipeExists);
 		} else {
-			throw new Exception("Recipe with id " + id + " not found");
+			throw new RecipeNotFoundException("Recipe with id " + id + " not found");
 		}
 	}
 
