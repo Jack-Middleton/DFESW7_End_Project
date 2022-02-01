@@ -65,7 +65,8 @@ public class RecipeController {
 
 	@PutMapping("/{id}")
 	@ResponseBody
-	public ResponseEntity<RecipeBook> updateByID(@PathVariable("id") long id, RecipeBook recipeBook) throws Exception {
+	public ResponseEntity<RecipeBook> updateByID(@PathVariable("id") long id, @RequestBody RecipeBook recipeBook)
+			throws Exception {
 		RecipeBook updatedRecipe = RecipeService.updateById(id, recipeBook);
 		return new ResponseEntity<RecipeBook>(updatedRecipe, HttpStatus.ACCEPTED);
 	}
