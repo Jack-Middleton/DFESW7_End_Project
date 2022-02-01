@@ -22,4 +22,8 @@ public class RecipeService {
 		return repository.findAll();
 	}
 
+	public RecipeBook addItem(RecipeBook recipeBook) {
+		return this.repository.save(recipeBook);
+	}
+
 }
