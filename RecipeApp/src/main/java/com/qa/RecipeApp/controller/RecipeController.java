@@ -5,7 +5,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,7 @@ public class RecipeController {
 		return authors;
 	}
 
+	// post method to add items to the database
 	@PostMapping
 	public ResponseEntity<RecipeBook> addRecipe(@Valid @RequestBody RecipeBook recipeBook) {
 
@@ -38,6 +41,13 @@ public class RecipeController {
 		ResponseEntity<RecipeBook> recipes = ResponseEntity.status(201).body(RecipeService.addItem(recipeBook));
 
 		return recipes;
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<RecipeBook> deleteByID(@PathVariable("id") long id) {
+		ResponseEntity<RecipeBook> recipes = ResponseEntity.status(204).body(RecipeService.deleteById(id));
+		return recipes;
+
 	}
 
 }
