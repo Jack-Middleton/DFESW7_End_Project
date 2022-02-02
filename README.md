@@ -50,16 +50,16 @@ I decided to create a Recipe storage system, using JPA for the repository, H2 fo
 
 <details>
 <summary>The MVP targets for this project were</summary>
-<ol>
-  <ul>Code fully integrated into a Version Control System using the feature-branch model: **main/dev/multiple features**</ul>
-  <ul>A project management board with full expansion on user stories, accpetance criteria and tasks needed to complete the project</ul>
-  <ul>A risk assessment which outlines the issues and risks faced during the project timeframe</ul>
-  <ul>A relational database, locally or within the Cloud, which is used to persist data for the project.</ul>
-  <ul>A functional application ‘back-end’, written in a suitable framework of the language covered in training (Java/Spring Boot), which meets the requirements set on your Jira board. </ul>
-  <ul>A build (.jar) of your application, including any dependencies it might need, produced using an integrated build tool (Maven). </ul>
-  <ul>A series of API calls designed with postman, used for CRUD functionality. (Create, Read, Update, Delete) </ul>
-  <ul>Fully designed test suites for the application you are creating, including both **unit** and **integration tests**. </ul>
- </ol>
+<ul>
+  <li>Code fully integrated into a Version Control System using the feature-branch model: **main/dev/multiple features**</li>
+  <li>A project management board with full expansion on user stories, accpetance criteria and tasks needed to complete the project</li>
+  <li>A risk assessment which outlines the issues and risks faced during the project timeframe</li>
+  <li>A relational database, locally or within the Cloud, which is used to persist data for the project.</li>
+  <li>A functional application ‘back-end’, written in a suitable framework of the language covered in training (Java/Spring Boot), which meets the requirements set on your Jira board. </li>
+  <li>A build (.jar) of your application, including any dependencies it might need, produced using an integrated build tool (Maven). </li>
+  <li>A series of API calls designed with postman, used for CRUD functionality. (Create, Read, Update, Delete) </li>
+  <li>Fully designed test suites for the application you are creating, including both **unit** and **integration tests**. </li>
+ </ul>
 </details>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
