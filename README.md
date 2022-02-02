@@ -152,20 +152,12 @@ Above is the code in the RecipeService class to add an item to the database, aga
 ![image](https://user-images.githubusercontent.com/81429555/152142560-b5a1f6a3-c416-4aa3-b1d8-35d1d51e8cb4.png)
 
 Above is the code in the RecipeController class, it uses the builder design pattern. 
-"create a variable recipes, that is a ResponseEntity of type RecipeBook = create a 200 okay response when successful and set the body of the response to be the delete by id method within the RecipeService class and return this new variable"
+"create a variable recipes, that is a ResponseEntity of type RecipeBook = create a 201 okay response when successful and set the body of the response to be the addItem method within the RecipeService class and return this new variable"
 
-![image](https://user-images.githubusercontent.com/81429555/152144347-180ceff6-c6d4-403e-9706-5124ce776b1e.png)
+![image](https://user-images.githubusercontent.com/81429555/152148249-2c16749c-3145-46d6-88b5-cc8fe714bee7.png)
 
+so Now we can see the Path Variable of /recipe/add works, and you can see that the post request works and gives a 201 created response, as set out in the code
 
-so the entity exists
-
-![image](https://user-images.githubusercontent.com/81429555/152144546-9d39ae54-437b-4810-841a-cddd8109d5c2.png)
-
-So it uses my custom path variable of 'recipe/delete/1' to delete the recipe entry with the ID of '1'
-
-![image](https://user-images.githubusercontent.com/81429555/152144992-8a23145a-b067-47ba-835d-5abcb6cbb581.png)
-
-so now when I do the getAll request, nothing exists in the repository. 
 
 ## Get By ID
 
@@ -177,7 +169,7 @@ The findById() method is a built in CRUD method
 
 ![image](https://user-images.githubusercontent.com/81429555/152146735-52b47b3f-f793-42d9-89ba-d4563ea54d70.png)
 
-This is the getById method in RecipeController, it works almost identically to the add method but instead of the 200 status it uses a 201 created response and calls the addItem() method from service.  
+This is the getById method in RecipeController, it works almost identically to the add method but instead of the 201 status it uses a 200 okay response and calls the getById() method from service.  
 
 ![image](https://user-images.githubusercontent.com/81429555/152147276-4367e980-94dd-4cbc-af26-0bd146c6b5ef.png)
 
@@ -187,6 +179,28 @@ so now there are two entries
 
 and here we can see that my Path Variable of /recipe/get/2 works and retrieves the entry with an id of 2 and returns it in the repsonse body with a 200 okay response.
 
+### Delete By ID
+
+![image](https://user-images.githubusercontent.com/81429555/152148526-ce6ece06-7f31-470b-b38b-e4c23410baa8.png)
+
+this is the code in RecipeController, which follows the same pattern as the add and get methods.
+
+![image](https://user-images.githubusercontent.com/81429555/152148905-1ac4b5ed-adb8-47ab-9f70-2a3c4cd4a915.png)
+
+this block of code, in the RecipeService class, which essentially says "if this id exists in the repository, call the deleteById() method, else throw a RecipeNotFoundException"
+
+
+![image](https://user-images.githubusercontent.com/81429555/152144347-180ceff6-c6d4-403e-9706-5124ce776b1e.png)
+
+this image is to show that the entity exists, for the puposes of deletion
+
+![image](https://user-images.githubusercontent.com/81429555/152144546-9d39ae54-437b-4810-841a-cddd8109d5c2.png)
+
+So it uses my custom path variable of 'recipe/delete/1' to delete the recipe entry with the ID of '1'
+
+![image](https://user-images.githubusercontent.com/81429555/152144992-8a23145a-b067-47ba-835d-5abcb6cbb581.png)
+
+so now when I do the getAll request, nothing exists in the repository. 
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
