@@ -103,7 +103,9 @@ Setting up Jira and Git went fairly smoothly and I felt like I made pretty good 
 <!-- USAGE EXAMPLES -->
 ## What went wrong
 
-Everything
+My MySQL install and Postman app completely fried for the first couple of days, which slowed things down massively until Morgan set me up with Swagger and how to use a H2 login, in hindsight I shouldn't have spent so long trying to fix those and should have used my time a little bit more effectively. 
+
+Getting over the inital hurdle of configuring Spring Boot was a bit of a struggle, but once I broke it down into modules and attacked it in small pieces it became much more manageable. 
 
 
 
@@ -111,7 +113,10 @@ Everything
 <!-- ROADMAP -->
 ## Possible improvements for future revisions
 
-
+I would like to further implement more custom exceptions and use an Error Handler, but that was a little out of the scope of my knowledge right now. 
+I would also like to create a front end so that users can log in and store online recipes, and also have the ability to search for other peoples recipes. 
+I could implement Patches, so that you dont have to update an entire entry each time you want to update
+On that topic, it would be nice to implement a few more custom queries to allow for more explicit searching of the database
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -119,6 +124,13 @@ Everything
 
 <!-- CONTRIBUTING -->
 ## Postman / API Screenshots
+![image](https://user-images.githubusercontent.com/81429555/152140639-963251f6-4854-446a-88b1-41dc5ad53d3c.png)
+This is the code used inside the RecipeController class for a read all method, it calls on the getAll() method that exists in my RecipeService class as shown below.
+![image](https://user-images.githubusercontent.com/81429555/152140880-c69c8291-3b4d-4339-b8a5-759c7d00602c.png)
+this in and of itself is fairly simple code, it takes in a repository and returns all entries in that repo. It uses the built in findAll() method. 
+![image](https://user-images.githubusercontent.com/81429555/152141282-afbddc96-7156-4d24-a55b-8d470fb32ea3.png)
+![image](https://user-images.githubusercontent.com/81429555/152141307-edc5c79a-ded1-4042-b377-97bd1190ec2d.png)
+So it uses the path variable I set out in my controller of '/recipe/getAll' and returns all entires with a status code of 200 ok.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
