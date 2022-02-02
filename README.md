@@ -143,7 +143,7 @@ this in and of itself is fairly simple code, it takes in a repository and return
 So it uses the path variable I set out in my controller of '/recipe/getAll' and returns all entires with a status code of 200 ok.
 
 
-### Post Method
+### Create Method
 
 ![image](https://user-images.githubusercontent.com/81429555/152142231-baa830a9-00ba-47a9-ac76-ed34691a094f.png)
 
@@ -202,6 +202,37 @@ So it uses my custom path variable of 'recipe/delete/1' to delete the recipe ent
 
 so now when I do the getAll request, nothing exists in the repository. 
 
+### Update By ID
+
+![image](https://user-images.githubusercontent.com/81429555/152162084-8c3b565e-250d-494e-a20e-a426c49dfa54.png)
+
+This is the updateById() method in RecipeService, which checks if the id exists in the repository, creates a new 
+instance of RecipeBook and uses getByID() to set the variable.
+It then makes use of my getters and setters in my RecipeBook POJO (Plain Old Java Object) to update the contents 
+and makes use of the built in save() method, returning the saved entity. 
+
+if this fails, it throws a RecipeNotFoundException
+
+![image](https://user-images.githubusercontent.com/81429555/152162691-d950c33c-c7dc-4475-8d49-a804fabadce6.png)
+
+This is the update method in RecipeController, it takes in two arguments of the id and the RecipeBook that is going 
+to be updated.
+Creates a new instance of RecipeBook, updatedRecipe, and uses the updateById() method to update the variable. 
+it then returns the value of the updatedRecipe and the Http response code 202 accepted (using HttpStatus.ACCEPTED), as a RecipeBook ResponseEntity
+
+![image](https://user-images.githubusercontent.com/81429555/152163319-b1bc0eda-e5f0-4064-bca0-1b77c594bcba.png)
+
+So here we can see that 2 entities exist currently, id 3 has a recipe name of "Fish n Chips" but I'd like to change that to 
+fish & chips
+
+![image](https://user-images.githubusercontent.com/81429555/152163750-d5e66d2c-0ab5-4bb5-b509-4171956f852e.png)
+
+I used my path variable of recipe/update/3 and in the body entered raw JSON to send an update (PUT) request, and recieved a 202 accepted request.
+
+![image](https://user-images.githubusercontent.com/81429555/152164033-1c22d142-bc0f-447d-99be-460e5581e938.png)
+
+and now you can see that when I do get all, the value of recipeName in the data entry with id 3 has changed to "Fish & CHips"
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -209,6 +240,65 @@ so now when I do the getAll request, nothing exists in the repository.
 
 <!-- LICENSE -->
 ## Database screenshots to show Data is being Persisted
+
+![image](https://user-images.githubusercontent.com/81429555/152167493-239f5200-8e98-4b42-af28-3655cbde5b5f.png)
+
+So this is to show that data at this present moment exists inside my local MySQL80 instance, running on port 8080, with an ID of 1 
+in my application-prod.properties file I have set auto to update, so that whenever Postman makes a request, the database in SQL updates
+
+### Create method
+
+<a href="#create-method"> Link to the create method </a>
+
+above is the link to the create documentation, which shows the code used for this next section.
+
+![image](https://user-images.githubusercontent.com/81429555/152168377-ae3d2251-857d-4bdb-9eab-59b2094d018a.png)
+
+I created a post request, entering new information and sent the request, receiving a 201 created response. 
+
+![image](https://user-images.githubusercontent.com/81429555/152168567-4ef431a7-c762-4952-820e-9490240542f9.png)
+
+and in SQL, the new entry appears when I SELECT * FROM RecipeBook
+
+### Delete
+
+<a href="#Delete-By-ID"> Link to Delete By ID Documentation </a>
+
+above is the link to the Delete By ID documentation, which shows the code used for this next section.
+
+![image](https://user-images.githubusercontent.com/81429555/152168902-37533402-5023-477b-b72a-1cc28da3dcfc.png)
+
+I now sent a delete request to my API with postman, to delete the previously created entry
+
+![image](https://user-images.githubusercontent.com/81429555/152169029-5ecb12b9-d658-46d9-a06e-737035eabfa9.png)
+
+and the entry has been successfully deleted from the MySQL database
+
+###  Update 
+
+<a href="#Update-By-ID"> Link to Update By ID Documentation </a>
+
+above is the link to the Update By ID documentation, which shows the code used for this next section.
+
+![image](https://user-images.githubusercontent.com/81429555/152169513-0b223686-7369-4bc2-983e-4c950c88bc86.png)
+
+So I've created a second entry, which now has an ID of 3 because the ID auto-increments each time a new one is created, 
+regardless of previous deletions.
+But now I'd like to change the details from Green pesto to Red Pesto
+
+![image](https://user-images.githubusercontent.com/81429555/152169880-5ada24a8-7f68-4c93-901f-53761b34939a.png)
+
+So I sent a PUT request to my API with Postman, updating Green Pesto to Red Pesto and recieved a 202 accepted request
+
+![image](https://user-images.githubusercontent.com/81429555/152170086-e036e544-9313-4f1b-8740-00dc2a1b1590.png)
+
+and now, as you can see, the data has changed in the MySQL database.
+
+![image](https://user-images.githubusercontent.com/81429555/152170246-fd6c193f-0feb-4804-ab50-af8ec211f3f4.png)
+
+![image](https://user-images.githubusercontent.com/81429555/152170288-051623df-ca20-455a-8d64-614376925a56.png)
+
+and just as final proof, the Spring Boot app has terminated completely, but the data still exists within the MySQL database.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -219,7 +309,7 @@ so now when I do the getAll request, nothing exists in the repository.
 ## Link to my Jira board
 
 
-<a href = "https://jack-middleton.atlassian.net/jira/software/projects/D7EP/boards/2/backlog?selectedIssue=D7EP-22"> Jira board </a>
+<a href = "https://jack-middleton.atlassian.net/jira/software/projects/D7EP/boards/2/backlog?selectedIssue=D7EP-22"> My Jira board </a>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
