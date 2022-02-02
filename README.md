@@ -87,23 +87,22 @@ To get a local copy up and running follow these simple example steps.
 
 ### How I expected the challenge to go
 
-I Honestly came in to this expecting it to be incredibly stressful and difficult, picturing myself struggling at every hurdle. 
+I honestly came in to this expecting it to be incredibly stressful and difficult, picturing myself struggling at every hurdle. 
 Which, while it isn't too far from what happened, once I dealt with app install issues things slowly started to piece themselves together using QA community, discussions with the trainers and some hefty use of stack overflow. 
 
 
 ### What went well
 
-The CRUD functionality was fairly simple enough to implement, ran in to a few serialization errors but it was a simple case of missing annotations. 
-Setting up Jira and Git went fairly smoothly and I felt like I made pretty good pace for the project, hitting all but 4 of the MVP targets within the first couple of days (with a few late nights thrown in but y'know)
+The CRUD functionality was fairly simple enough to implement, I ran in to a few serialization errors but it was a simple case of missing annotations. 
+Setting up Jira and Git went fairly smoothly and I felt like I made good pace for the project, hitting all but 4 of the MVP targets within the first couple of days.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
-<!-- USAGE EXAMPLES -->
 ## What went wrong
 
-My MySQL install and Postman app completely fried for the first couple of days, which slowed things down massively until Morgan set me up with Swagger and how to use a H2 login, in hindsight I shouldn't have spent so long trying to fix those and should have used my time a little bit more effectively. 
+My MySQL install and Postman app were unresponsive for the first couple of days, which slowed things down massively until Morgan (QA Trainer) set me up with Swagger and how to use a H2 login. In hindsight I shouldn't have spent so long trying to fix those and should have used my time a little bit more effectively. 
 
 Getting over the inital hurdle of configuring Spring Boot was a bit of a struggle, but once I broke it down into modules and attacked it in small pieces it became much more manageable. 
 
@@ -126,24 +125,19 @@ On that topic, it would be nice to implement a few more custom queries to allow 
 ## Postman / API Screenshots
 
 ### Get All
-![image](https://user-images.githubusercontent.com/81429555/152140639-963251f6-4854-446a-88b1-41dc5ad53d3c.png)
 
+![image](https://user-images.githubusercontent.com/81429555/152140639-963251f6-4854-446a-88b1-41dc5ad53d3c.png)
 
 This is the code used inside the RecipeController class for a read all method, it calls on the getAll() method that exists in my RecipeService class as shown below.
 
-
  ![image](https://user-images.githubusercontent.com/81429555/152140880-c69c8291-3b4d-4339-b8a5-759c7d00602c.png)
 
-
 this in and of itself is fairly simple code, it takes in a repository and returns all entries in that repo. It uses the built in findAll() method. 
-
 
   ![image](https://user-images.githubusercontent.com/81429555/152141282-afbddc96-7156-4d24-a55b-8d470fb32ea3.png)
 
 
-
   ![image](https://user-images.githubusercontent.com/81429555/152141307-edc5c79a-ded1-4042-b377-97bd1190ec2d.png)
-
 
 
 So it uses the path variable I set out in my controller of '/recipe/getAll' and returns all entires with a status code of 200 ok.
@@ -172,6 +166,27 @@ So it uses my custom path variable of 'recipe/delete/1' to delete the recipe ent
 ![image](https://user-images.githubusercontent.com/81429555/152144992-8a23145a-b067-47ba-835d-5abcb6cbb581.png)
 
 so now when I do the getAll request, nothing exists in the repository. 
+
+## Get By ID
+
+![image](https://user-images.githubusercontent.com/81429555/152145852-0a3847af-de53-4b20-904d-3e59f7e26356.png)
+
+This is the getById code in RecipeService, essentially saying if this id exists inside the repository, find the id and get the information, else 
+throw a custom exception RecipeNotFoundException. 
+The findById() method is a built in CRUD method
+
+![image](https://user-images.githubusercontent.com/81429555/152146735-52b47b3f-f793-42d9-89ba-d4563ea54d70.png)
+
+This is the getById method in RecipeController, it works almost identically to the add method but instead of the 200 status it uses a 201 created response and calls the addItem() method from service.  
+
+![image](https://user-images.githubusercontent.com/81429555/152147276-4367e980-94dd-4cbc-af26-0bd146c6b5ef.png)
+
+so now there are two entries
+
+![image](https://user-images.githubusercontent.com/81429555/152147803-ed581c8d-6726-4687-86c7-97d2d1ba5e00.png)
+
+and here we can see that my Path Variable of /recipe/get/2 works and retrieves the entry with an id of 2 and returns it in the repsonse body with a 200 okay response.
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
