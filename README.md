@@ -73,6 +73,8 @@ I decided to create a Recipe storage system, using JPA for the repository, H2 fo
 * [Spring Boot](https://docs.spring.io/)
 * [Junit](https://junit.org/)
 * [MySQL](https://dev.mysql.com/)
+* [Mockito](https://site.mockito.org/)
+
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
