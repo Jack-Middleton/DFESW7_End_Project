@@ -33,16 +33,15 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#what-went-well">What went well</a></li>
+        <li><a href="#what-went-wrong">What went wrong</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#Possible-improvements-for-future-revisions">Possible improvements for future revisions</a></li>
+    <li><a href="#Postman-/-API-Screenshots">Postman / API Screenshots</a></li>
+    <li><a href="#Database-screenshots-to-show-Data-is-being-persistence">Database screenshots to show Data is being Persisted</a></li>
+    <li><a href="#Link-to-my-jira-board">Link to my Jira board</a></li>
+
   </ol>
 </details>
 
