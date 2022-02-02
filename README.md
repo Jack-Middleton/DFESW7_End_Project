@@ -124,6 +124,8 @@ On that topic, it would be nice to implement a few more custom queries to allow 
 
 <!-- CONTRIBUTING -->
 ## Postman / API Screenshots
+
+### Get All
 ![image](https://user-images.githubusercontent.com/81429555/152140639-963251f6-4854-446a-88b1-41dc5ad53d3c.png)
 
 
@@ -145,6 +147,31 @@ this in and of itself is fairly simple code, it takes in a repository and return
 
 
 So it uses the path variable I set out in my controller of '/recipe/getAll' and returns all entires with a status code of 200 ok.
+
+
+### Post Method
+
+![image](https://user-images.githubusercontent.com/81429555/152142231-baa830a9-00ba-47a9-ac76-ed34691a094f.png)
+
+Above is the code in the RecipeService class to add an item to the database, again fairly simple, just uses the built in .save() method. Because the save() method changes the instance of the entity, we return the saved instance.
+
+![image](https://user-images.githubusercontent.com/81429555/152142560-b5a1f6a3-c416-4aa3-b1d8-35d1d51e8cb4.png)
+
+Above is the code in the RecipeController class, it uses the builder design pattern. 
+"create a variable recipes, that is a ResponseEntity of type RecipeBook = create a 200 okay response when successful and set the body of the response to be the delete by id method within the RecipeService class and return this new variable"
+
+![image](https://user-images.githubusercontent.com/81429555/152144347-180ceff6-c6d4-403e-9706-5124ce776b1e.png)
+
+
+so the entity exists
+
+![image](https://user-images.githubusercontent.com/81429555/152144546-9d39ae54-437b-4810-841a-cddd8109d5c2.png)
+
+So it uses my custom path variable of 'recipe/delete/1' to delete the recipe entry with the ID of '1'
+
+![image](https://user-images.githubusercontent.com/81429555/152144992-8a23145a-b067-47ba-835d-5abcb6cbb581.png)
+
+so now when I do the getAll request, nothing exists in the repository. 
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
