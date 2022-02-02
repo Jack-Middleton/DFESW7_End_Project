@@ -31,11 +31,9 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
+      <a href="#getting-started">Getting Started</a>    
         <li><a href="#what-went-well">What went well</a></li>
         <li><a href="#what-went-wrong">What went wrong</a></li>
-      </ul>
     </li>
     <li><a href="#Possible-improvements-for-future-revisions">Possible improvements for future revisions</a></li>
     <li><a href="#Postman-/-API-Screenshots">Postman / API Screenshots</a></li>
