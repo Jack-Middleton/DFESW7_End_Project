@@ -50,7 +50,7 @@ I decided to create a Recipe storage system, using JPA for the repository, H2 fo
 
 <details>
 <summary>The MVP targets for this project were</summary>
-<ul>
+<ul> 
   <li>Code fully integrated into a Version Control System using the feature-branch model: **main/dev/multiple features**</li>
   <li>A project management board with full expansion on user stories, accpetance criteria and tasks needed to complete the project</li>
   <li>A risk assessment which outlines the issues and risks faced during the project timeframe</li>
@@ -107,7 +107,7 @@ My MySQL install and Postman app were unresponsive for the first couple of days,
 Getting over the inital hurdle of configuring Spring Boot was a bit of a struggle, but once I broke it down into modules and attacked it in small pieces it became much more manageable. 
 
 
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 ## Possible improvements for future revisions
@@ -142,7 +142,7 @@ this in and of itself is fairly simple code, it takes in a repository and return
 
 So it uses the path variable I set out in my controller of '/recipe/getAll' and returns all entires with a status code of 200 ok.
 
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 ### Create Method
 
 ![image](https://user-images.githubusercontent.com/81429555/152142231-baa830a9-00ba-47a9-ac76-ed34691a094f.png)
@@ -158,7 +158,7 @@ Above is the code in the RecipeController class, it uses the builder design patt
 
 so Now we can see the Path Variable of /recipe/add works, and you can see that the post request works and gives a 201 created response, as set out in the code
 
-
+<p align="right">(<a href="#top">back to top</a>)</p>
 ## Get By ID
 
 ![image](https://user-images.githubusercontent.com/81429555/152145852-0a3847af-de53-4b20-904d-3e59f7e26356.png)
@@ -179,6 +179,7 @@ so now there are two entries
 
 and here we can see that my Path Variable of /recipe/get/2 works and retrieves the entry with an id of 2 and returns it in the repsonse body with a 200 okay response.
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 ### Delete By ID
 
 ![image](https://user-images.githubusercontent.com/81429555/152148526-ce6ece06-7f31-470b-b38b-e4c23410baa8.png)
@@ -202,6 +203,7 @@ So it uses my custom path variable of 'recipe/delete/1' to delete the recipe ent
 
 so now when I do the getAll request, nothing exists in the repository. 
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 ### Update By ID
 
 ![image](https://user-images.githubusercontent.com/81429555/152162084-8c3b565e-250d-494e-a20e-a426c49dfa54.png)
@@ -238,7 +240,6 @@ and now you can see that when I do get all, the value of recipeName in the data 
 
 
 
-<!-- LICENSE -->
 ## Database screenshots to show Data is being Persisted
 
 ![image](https://user-images.githubusercontent.com/81429555/152167493-239f5200-8e98-4b42-af28-3655cbde5b5f.png)
@@ -260,6 +261,7 @@ I created a post request, entering new information and sent the request, receivi
 
 and in SQL, the new entry appears when I SELECT * FROM RecipeBook
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 ### Delete
 
 <a href="#Delete-By-ID"> Link to Delete By ID Documentation </a>
@@ -274,6 +276,7 @@ I now sent a delete request to my API with postman, to delete the previously cre
 
 and the entry has been successfully deleted from the MySQL database
 
+<p align="right">(<a href="#top">back to top</a>)</p>
 ###  Update 
 
 <a href="#Update-By-ID"> Link to Update By ID Documentation </a>
@@ -305,7 +308,7 @@ and just as final proof, the Spring Boot app has terminated completely, but the 
 
 
 
-<!-- CONTACT -->
+
 ## Link to my Jira board
 
 
