@@ -124,12 +124,20 @@ On that topic, it would be nice to implement a few more custom queries to allow 
 
 <!-- CONTRIBUTING -->
 ## Postman / API Screenshots
+<div>
 ![image](https://user-images.githubusercontent.com/81429555/152140639-963251f6-4854-446a-88b1-41dc5ad53d3c.png)
+  </div>
 This is the code used inside the RecipeController class for a read all method, it calls on the getAll() method that exists in my RecipeService class as shown below.
-![image](https://user-images.githubusercontent.com/81429555/152140880-c69c8291-3b4d-4339-b8a5-759c7d00602c.png)
+<div>
+  ![image](https://user-images.githubusercontent.com/81429555/152140880-c69c8291-3b4d-4339-b8a5-759c7d00602c.png)
+  </div>
 this in and of itself is fairly simple code, it takes in a repository and returns all entries in that repo. It uses the built in findAll() method. 
-![image](https://user-images.githubusercontent.com/81429555/152141282-afbddc96-7156-4d24-a55b-8d470fb32ea3.png)
-![image](https://user-images.githubusercontent.com/81429555/152141307-edc5c79a-ded1-4042-b377-97bd1190ec2d.png)
+<div>
+  ![image](https://user-images.githubusercontent.com/81429555/152141282-afbddc96-7156-4d24-a55b-8d470fb32ea3.png)
+  </div>
+<div>
+  ![image](https://user-images.githubusercontent.com/81429555/152141307-edc5c79a-ded1-4042-b377-97bd1190ec2d.png)
+  </div>
 So it uses the path variable I set out in my controller of '/recipe/getAll' and returns all entires with a status code of 200 ok.
 
 
