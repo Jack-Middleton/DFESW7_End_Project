@@ -101,4 +101,28 @@ public class RecipeServiceUnitTesting {
 
 	}
 
+	@Test
+	void testUpdate() {
+		long id = expectedRecipeWithID.getId();
+
+		// mocking the updateById method body that updates the details of the recipe
+		// entry
+		RecipeBook updatedRecipe = new RecipeBook(expectedRecipeWithID.getId(),
+				expectedRecipeWithID.getAuthor() + "Middleton", expectedRecipeWithID.getRecipeDetails(),
+				expectedRecipeWithID.getRecipeName());
+		// WHEN
+		Mockito.when(repo.existsById(id)).thenReturn(true);
+		Mockito.when(repo.getById(id)).thenReturn(expectedRecipeWithID);
+		Mockito.when(repo.save(expectedRecipeWithID)).thenReturn(updatedRecipe);
+
+		// THEN
+		Assertions.assertThat(this.service.updateById(id, updatedRecipe)).isEqualTo(updatedRecipe);
+
+		// Verify
+		verify(repo).existsById(id);
+		verify(repo).getById(id);
+		verify(repo).save(expectedRecipeWithID);
+
+	}
+
 }
