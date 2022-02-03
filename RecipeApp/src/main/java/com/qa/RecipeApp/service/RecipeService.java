@@ -30,6 +30,9 @@ public class RecipeService {
 	public RecipeBook deleteById(long id) {
 		if (this.repository.existsById(id)) {
 			this.repository.deleteById(id);
+		} else {
+			// Custom exception
+			throw new RecipeNotFoundException("Recipe with id " + id + " not found");
 		}
 		return null;
 	}
