@@ -1,12 +1,13 @@
 package com.qa.RecipeApp.RecipeService;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +18,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.qa.RecipeApp.data.entity.RecipeBook;
 import com.qa.RecipeApp.data.repository.Repository;
+import com.qa.RecipeApp.exceptions.RecipeNotFoundException;
 import com.qa.RecipeApp.service.RecipeService;
 
 @ExtendWith(MockitoExtension.class)
@@ -43,7 +45,7 @@ public class RecipeServiceUnitTesting {
 	}
 
 	@Test
-	void testCreate() {
+	public void testCreate() {
 		// GIVEN
 		final RecipeBook NEW_RECIPE = new RecipeBook(null, "Mac", "Mac", "Jack");
 		final RecipeBook SAVED_RECIPE = new RecipeBook(1l, "Mac", "Mac", "Jack");
@@ -52,7 +54,7 @@ public class RecipeServiceUnitTesting {
 		Mockito.when(this.repo.save(NEW_RECIPE)).thenReturn(SAVED_RECIPE);
 
 		// THEN
-		Assertions.assertThat(this.service.addItem(NEW_RECIPE)).isEqualTo(SAVED_RECIPE);
+		assertThat(this.service.addItem(NEW_RECIPE)).isEqualTo(SAVED_RECIPE);
 
 		// verify that our repo was accessed exactly once
 		verify(this.repo, Mockito.times(1)).save(NEW_RECIPE);
@@ -60,12 +62,12 @@ public class RecipeServiceUnitTesting {
 	}
 
 	@Test
-	void testGetAll() {
+	public void testGetAll() {
 		// WHEN
 		Mockito.when(this.repo.findAll()).thenReturn(recipes);
 
 		// THEN
-		Assertions.assertThat(this.service.getAll()).isEqualTo(recipes);
+		assertThat(this.service.getAll()).isEqualTo(recipes);
 
 		// verify
 		verify(this.repo, Mockito.times(1)).findAll();
@@ -73,7 +75,7 @@ public class RecipeServiceUnitTesting {
 	}
 
 	@Test
-	void testDelete() {
+	public void testDelete() {
 		long id = expectedRecipeWithID.getId();
 		// WHEN
 		Mockito.when(this.repo.existsById(id)).thenReturn(true);
@@ -88,13 +90,13 @@ public class RecipeServiceUnitTesting {
 	}
 
 	@Test
-	void testGetById() {
+	public void testGetById() {
 		long id = expectedRecipeWithID.getId();
 		// WHEN
 		Mockito.when(this.repo.findById(id)).thenReturn(Optional.of(expectedRecipeWithID));
 
 		// THEN
-		Assertions.assertThat(this.service.getById(id)).isEqualTo(expectedRecipeWithID);
+		assertThat(this.service.getById(id)).isEqualTo(expectedRecipeWithID);
 
 		// verify
 		verify(repo).findById(id);
@@ -102,7 +104,7 @@ public class RecipeServiceUnitTesting {
 	}
 
 	@Test
-	void testUpdate() {
+	public void testUpdate() {
 		long id = expectedRecipeWithID.getId();
 
 		// mocking the updateById method body that updates the details of the recipe
@@ -116,12 +118,61 @@ public class RecipeServiceUnitTesting {
 		Mockito.when(repo.save(expectedRecipeWithID)).thenReturn(updatedRecipe);
 
 		// THEN
-		Assertions.assertThat(this.service.updateById(id, updatedRecipe)).isEqualTo(updatedRecipe);
+		assertThat(this.service.updateById(id, updatedRecipe)).isEqualTo(updatedRecipe);
 
 		// Verify
 		verify(repo).existsById(id);
 		verify(repo).getById(id);
 		verify(repo).save(expectedRecipeWithID);
+
+	}
+
+	@Test
+	public void deleteExceptionTest() {
+		long id = 23456789;
+		Mockito.when(repo.existsById(id)).thenReturn(false);
+
+		RecipeNotFoundException x = Assertions.assertThrows(RecipeNotFoundException.class, () -> {
+			service.deleteById(id);
+		});
+
+		String expected = "Recipe with id " + id + " not found";
+		assertThat(x.getMessage()).isEqualTo(expected);
+		verify(repo).existsById(id);
+
+	}
+
+	@Test
+	public void updateExceptionTest() {
+		long id = 98765;
+		RecipeBook updatedRecipe = new RecipeBook(expectedRecipeWithID.getId(),
+				expectedRecipeWithID.getAuthor() + "Middleton", expectedRecipeWithID.getRecipeDetails(),
+				expectedRecipeWithID.getRecipeName());
+
+		Mockito.when(repo.existsById(id)).thenReturn(false);
+
+		RecipeNotFoundException x = Assertions.assertThrows(RecipeNotFoundException.class, () -> {
+			service.updateById(id, expectedRecipeWithID);
+		});
+
+		String expected = "Recipe with id " + id + " not found";
+		assertThat(x.getMessage()).isEqualTo(expected);
+		verify(repo).existsById(id);
+
+	}
+
+	@Test
+	public void getByIdTest() {
+		long id = 746458498;
+
+		Mockito.when(repo.findById(id)).thenReturn(Optional.empty());
+
+		RecipeNotFoundException x = Assertions.assertThrows(RecipeNotFoundException.class, () -> {
+			service.getById(id);
+		});
+		String expected = "Recipe with id " + id + " not found";
+		assertThat(x.getMessage()).isEqualTo(expected);
+		verify(repo).findById(id);
 
 	}
 
