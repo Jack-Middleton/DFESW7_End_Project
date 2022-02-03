@@ -50,14 +50,9 @@ public class RecipeService {
 	}
 
 	public RecipeBook getById(long id) {
-		if (this.repository.existsById(id)) {
-			return this.repository.findById(id).get();
-		}
-
-		else {
-			// Custom exception
-			throw new RecipeNotFoundException("Recipe with id " + id + " not found");
-		}
+		return this.repository.findById(id).orElseThrow(() -> {
+			return new RecipeNotFoundException("Recipe with id " + id + " not found");
+		});
 
 	}
 
