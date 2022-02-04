@@ -162,7 +162,7 @@ public class RecipeServiceUnitTesting {
 	}
 
 	@Test
-	public void getByIdTest() {
+	public void getByIdExceptionTest() {
 		long id = 746458498;
 
 		Mockito.when(repo.findById(id)).thenReturn(Optional.empty());
