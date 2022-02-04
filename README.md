@@ -163,11 +163,9 @@ so Now we can see the Path Variable of /recipe/add works, and you can see that t
 <p align="right">(<a href="#top">back to top</a>)</p>
 ## Get By ID
 
-![image](https://user-images.githubusercontent.com/81429555/152145852-0a3847af-de53-4b20-904d-3e59f7e26356.png)
+![image](https://user-images.githubusercontent.com/81429555/152507426-b3c0bb71-6264-45b0-ac6b-91b11b6dcf2a.png)
 
-This is the getById code in RecipeService, essentially saying if this id exists inside the repository, find the id and get the information, else 
-throw a custom exception RecipeNotFoundException. 
-The findById() method is a built in CRUD method
+This is the getById method in the RecipeService Class, it uses a lambda to nest return statements, essentially acting as an in-line if/else statement. 
 
 ![image](https://user-images.githubusercontent.com/81429555/152146735-52b47b3f-f793-42d9-89ba-d4563ea54d70.png)
 
@@ -319,5 +317,87 @@ and just as final proof, the Spring Boot app has terminated completely, but the 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
+## Testing and Coverage
+### Unit Testing
+
+![image](https://user-images.githubusercontent.com/81429555/152508578-9fd4d3ff-a71b-4d20-a38e-99e30ce5b665.png)
+
+So this before each method is used to populate a dummy dB for use during testing, in this case Unit Testing
+
+![image](https://user-images.githubusercontent.com/81429555/152508736-35993eed-a2ca-4e03-aff5-980d7b985ad7.png)
+
+My Create test creates a dummy new_recipe and saved_recipe, mocks the repo.save() method, asserts that when the addItem() method is called new_recipe should be equal to saved_recipe and then verifies that the repo was accessed exactly one time.
+
+![image](https://user-images.githubusercontent.com/81429555/152509308-8dcb3e18-4441-48cb-be4b-1a1f0e516030.png)
+
+My GetAll test is a very simple, WHEN I run repo.findAll() runs then return the recipes database, THEN check that serivce.getALL() method is equal to the recipes database and verify the repo was accessed once using findAll
+
+![image](https://user-images.githubusercontent.com/81429555/152509817-843c5023-61c3-4b3a-8ce7-add2bc61b6c2.png)
+
+My delete test has to work by ID because of the way my delete method works in my service class. So I set a variable equal to the id of a variable created in @BeforeEach, mock the existsById() method to check it returns true, run the delete method and then verify that existsById and deleteById worked.
+
+![image](https://user-images.githubusercontent.com/81429555/152510089-4f6e4fed-7a53-4d28-ae13-7b92724b782c.png)
+
+GetById test works functionally similar to delete, first i set a variable equal to the ID of a variable in my @BeforeEach method, mock that the findById repo method returns an optional of the variable expectedRecipeWithId, assert that when the method in service runs, it is equal to the result I expected, and verify that findById works
+
+![image](https://user-images.githubusercontent.com/81429555/152510388-bf9ecb90-bc8a-454d-aa46-0fa23ec93d3c.png)
+
+Update works a little differently, first we have to create an ID variable as before, but then we have to create an 'expected' updated recipe variable and change it in some way to the original, I did it here using my getters and string concatenation.
+
+I then mock all the functions within my updateById() method in the service class, that being that the existsById() method returns true, getById() returns expectedRecipeWithId() and when expectedRecipe is saved it returns the updatedRecipe
+
+then Its just a simple case of asserting that the updateById method is equal to the dummy updated recipe I created earlier and verifying that each one of the wwhen methods works as it should
+
+![image](https://user-images.githubusercontent.com/81429555/152511385-708380d8-0cf3-489e-9f08-6e33a4b242a0.png)
+
+The exception tests all work functionally the same, with minor tweaks so I'll just show the deleteExceptiontest. 
+This time we create a random ID not in the dB and mock that existsById returns false
+
+then we use a lambda function to say that when this line of code runs, run the bit after the lambda arrow first, and when that fails and throws an exception (as expected), assert that it throws a RecipeNotFoundException (my custom Exception), and set vbariable x of type RecipeNotFoundException equal to that
+
+I set a String variable equal to my custom exceptioon message and then assert that the message inside x is equal to the expected message, and then verify that existsById does infact return false. 
+
+### Controller System Integration
+
+I don't plan on going in to all of the tests, because the controller integration and service integration aren't too dissimilar from one another in terms of theory, but I'll run through the Controller System Integration tests so I have a resource to look back over should I need it 
+
+![image](https://user-images.githubusercontent.com/81429555/152512213-73f2a228-f9b2-4f29-8f89-9d41a502efdc.png)
+
+Again we use a before each to set up a dummy dB for use during testing, but this time we use the last two lines 'int size' and 'newElement' to make sure that when we create a new element in the dB, we can get its ID by getting the ID of the previous last element and adding 1, we do this because if the @Transactional annotation were to stop working and we were to start getting off by one errors, we could switch to a tear down @AfterEach method, and although the ID would continually increment, we would still always get the correct last elements ID
+
+![image](https://user-images.githubusercontent.com/81429555/152512483-b4f39aa2-801c-4165-9ea6-8cfe7a9b574c.png)
+
+Here we create a mock request, using the path that was outlined in the Controller 
+We specify that it accepts an expected returned conttent type of application/jso0n
+we use ObjectMapper to create an expected json string 
+statusMatcher contains our expected response code, in this case 200 ok and contentMatcher contains our expected return content, in this case the recipes dB
+and then we perform the Mock request telling it that we expect statusMatcher and contentMatcher
+
+![image](https://user-images.githubusercontent.com/81429555/152512846-8c39c029-be7b-4eca-aacd-9dc32415f4fd.png)
+
+![image](https://user-images.githubusercontent.com/81429555/152512858-35689972-d529-45a8-b55a-8bb8841e5b89.png)
+
+getById are functionally the same, the only thing that changes is the path.
+We get an ID from the dB and put it inside the long id variable, set up our mock request and its content type, content and accepted content type
+we only need a statusMatcher, because in this case we don't care that the body of the response is exactly right, all we care about is that it found the correct ID and returned it with a status response of 200 ok, and then perform the Mock request
+
+![image](https://user-images.githubusercontent.com/81429555/152513268-956bb7c6-5dbb-4b86-8c12-a4c788d3e45b.png)
+
+Testing the create method was again, not too bad. 
+First we create a new recipe and an expected recipe, similar to how we did in the unit testing.
+then we set up our mock request, its content type, accepted content type and the content body, but this time I want the body to be the newRecipe created earlier
+then we set up the statusMatcher as normal, expecting a 201 created response, and the contentMatcher this time is expecting a json string of the exppectedRecipe
+Then we perform the mock request and check our expecteds.
+
+![image](https://user-images.githubusercontent.com/81429555/152513311-91911c51-bf84-44cd-8542-9e6b3092c44b.png)
+
+and finally, the update method
+
+as before, we create a newRecipe and expectedRecipe variable, this time they can be the same as we are not explicitly checking whether anything changed, we just care that it returns the expectedRecipe which contains the ID. 
+We then create our mock requestr, seetting the path, content type, accepted content type and expected content, create a json string equal to the expected recipe with ID and run the mock request with the expected status and content matcher
 
 
+
+
+
+<p align="right">(<a href="#top">back to top</a>)</p>
