@@ -83,9 +83,38 @@ I decided to create a Recipe storage system, using JPA for the repository, H2 fo
 
 <!-- GETTING STARTED -->
 ## Getting Started
+So I'm going to assume that you have JDK-11 and MySQL installed. 
+So next thing to do is clone down my git-repo from main 
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+![image](https://user-images.githubusercontent.com/81429555/152538684-c982984a-4a5b-4adf-b882-b3cfdd66b296.png)
+
+press the code drop down in the top right corner
+
+![image](https://user-images.githubusercontent.com/81429555/152538735-03de7c51-a763-4287-a9fd-246ca3c0b7e4.png)
+
+and hit this button to copy the URL to the repo, open up a terminal in the location you want to clone the repo too and run the following command 
+
+![image](https://user-images.githubusercontent.com/81429555/152538861-781015e2-d747-4c02-b1e3-8d57dba7b8d4.png)
+
+Once this is done you should be able to ls and see DFESW7_End_Project, CD into this folder and then CD into RecipeApp
+Once in here, run the following command on your terminal 
+
+![image](https://user-images.githubusercontent.com/81429555/152539228-7a21599f-2eae-48af-a52f-3c580e6c58e4.png)
+
+one note though, in application.properties, make sure it is pointed to dev to run the H2 testing environment or prod to get the data to persist in MySQL
+if running through application-prod, in application-prod.properties
+
+![image](https://user-images.githubusercontent.com/81429555/152539440-63de8cd6-0fe2-4c88-9878-73a78ced68d1.png)
+
+change username / password to yours (usually root for username and then your password) 
+change recipeschema to your schema name, and then in your MySQL workbench run 
+
+![image](https://user-images.githubusercontent.com/81429555/152539830-80fcbe18-1a00-44da-9227-6159eae4d376.png)
+
+as found in the schema.sql file.
+
+Information on running the requests from Postman through the API can be found <a href="#Postman-/-API-Screenshots"> here </a>
+
 
 ### How I expected the challenge to go
 
@@ -396,7 +425,15 @@ and finally, the update method
 as before, we create a newRecipe and expectedRecipe variable, this time they can be the same as we are not explicitly checking whether anything changed, we just care that it returns the expectedRecipe which contains the ID. 
 We then create our mock requestr, seetting the path, content type, accepted content type and expected content, create a json string equal to the expected recipe with ID and run the mock request with the expected status and content matcher
 
+### Test Results
 
+![image](https://user-images.githubusercontent.com/81429555/152538358-b2f08ca2-a2ab-44f3-a55f-4ec6fb6bf2d0.png)
+
+19/19 Tests run succesfuly 
+
+![image](https://user-images.githubusercontent.com/81429555/152538424-4d9dabdd-43b4-4887-8e5f-6f17919855a8.png)
+
+giving me a total coverage on src/main/java of 81.6%
 
 
 
